@@ -28,7 +28,14 @@
     },
     "plugins": [
       "expo-router",
-      "expo-status-bar"
+      "expo-status-bar",
+      "@maplibre/maplibre-react-native",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Thermal shows your position on the map so you can see where you are relative to terrain, launches and airspace."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

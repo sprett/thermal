@@ -5,8 +5,9 @@ import { NativeTabs } from 'expo-router/unstable-native-tabs';
  * draws it, so the blur, the scroll-edge behaviour and the theme response are
  * the platform's, not a reimplementation of them.
  *
- * `index` is the Fly screen; expo-router needs one route in the group to own
- * `/`, and Fly is where the app should open.
+ * `index` is Fly — the map and the flight instrument on one surface, since a
+ * pilot on launch is doing both at once. expo-router needs one route in the
+ * group to own `/`, and Fly is where the app should open.
  */
 export default function TabsLayout() {
   return (
@@ -25,14 +26,6 @@ export default function TabsLayout() {
           md={{ default: 'list', selected: 'list' }}
         />
         <NativeTabs.Trigger.Label>Flights</NativeTabs.Trigger.Label>
-      </NativeTabs.Trigger>
-
-      <NativeTabs.Trigger name="map">
-        <NativeTabs.Trigger.Icon
-          sf={{ default: 'map', selected: 'map.fill' }}
-          md={{ default: 'map', selected: 'map' }}
-        />
-        <NativeTabs.Trigger.Label>Map</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="you">
