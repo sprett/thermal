@@ -8,12 +8,15 @@ import {
   type CameraRef,
 } from '@maplibre/maplibre-react-native';
 import * as Location from 'expo-location';
-import { Button } from 'heroui-native';
+import { router } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { Pressable, Text, useColorScheme, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { GlassButton } from '../../components/glass/GlassButton';
 import { hasMapTilerKey, mapStyleUrl } from '../../lib/maptiler';
+import { useThemeColors } from '../../lib/theme';
+import { font } from '../../lib/type';
 
 /** Voss — somewhere to look at before the first fix arrives. */
 const INITIAL_CENTER: [number, number] = [6.4145, 60.6285];
@@ -45,6 +48,7 @@ export default function FlyScreen() {
   // so the RN hook is the resolved scheme either way — one source, same as the
   // rest of the app.
   const scheme = useColorScheme() === 'dark' ? 'dark' : 'light';
+  const colors = useThemeColors();
   const insets = useSafeAreaInsets();
 
   const cameraRef = useRef<CameraRef>(null);
@@ -108,17 +112,23 @@ export default function FlyScreen() {
         </Pressable>
       ) : null}
 
-      {/* Placeholder — this is where recording starts. Sits clear of the tab
-          bar rather than inside it, so it stays reachable with one thumb. */}
-      <View
-        pointerEvents="box-none"
-        style={{ bottom: insets.bottom + 28, right: 16 }}
-        className="absolute"
+      {/* Starts the flight. Sits clear of the tab bar rather than inside it,
+          so it stays reachable with one thumb. */}
+      <GlassButton
+        accessibilityLabel="Start flying"
+        onPress={() => router.push('/fly')}
+        tintColor={`${colors.brand}A6`}
+        borderRadius={28}
+        style={{ position: 'absolute', bottom: insets.bottom + 28, right: 16 }}
+        className="h-14 w-24 items-center justify-center rounded-[28px]"
       >
-        <Button size="lg" onPress={() => {}}>
+        <Text
+          style={{ fontFamily: font.sansSemibold, fontSize: 17 }}
+          className="text-paper"
+        >
           Fly
-        </Button>
-      </View>
+        </Text>
+      </GlassButton>
     </View>
   );
 }

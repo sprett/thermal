@@ -5,19 +5,95 @@
 /*
  * HeroUI Native ships the full semantic token set already split across light and
  * dark (see node_modules/heroui-native/lib/module/styles/variables.css), so
- * `bg-background`, `text-foreground`, `border-border`, `text-muted` and friends
- * switch theme on their own. Override any of them below to make the app ours —
- * declare a token in BOTH variants or it will only be right in one of them.
+ * `bg-background`, `text-foreground` and friends switch theme on their own.
+ *
+ * Below are Thermal's own tokens, taken from the design's palette. They follow
+ * HeroUI's pattern deliberately: declare the utility in `@theme inline static`
+ * pointing at a plain variable, then set that variable once per variant. A
+ * token declared in only one variant is a bug you will only see in the other.
+ *
+ * Colours derive from ICAO chart conventions so the semantics are already
+ * familiar to a pilot. Magenta is reserved for airspace and is never a brand
+ * accent — a semantic collision on a safety surface is a real hazard.
  */
+
+@theme inline static {
+  --color-paper: var(--paper);
+  --color-paper-sunk: var(--paper-sunk);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+
+  --color-climb: var(--climb);
+  --color-climb-strong: var(--climb-strong);
+  --color-sink: var(--sink);
+  --color-sink-strong: var(--sink-strong);
+  --color-neutral-air: var(--neutral-air);
+
+  --color-airspace-ctr: var(--airspace-ctr);
+  --color-airspace-tma: var(--airspace-tma);
+
+  --color-warn: var(--warn);
+}
 
 @layer theme {
   :root {
     @variant light {
-      /* placeholder — app tokens go here */
+      --paper: #fcfcfa;
+      --paper-sunk: #f4f4f1;
+      --rule: #e2e2dc;
+      --rule-strong: #c4c4bc;
+
+      --ink: #16181a;
+      --ink-muted: #6b6f73;
+      --ink-faint: #9ba0a4;
+
+      /* "QNH blue" — the ink of an altimeter subscale. */
+      --brand: #1b3a6b;
+      --brand-soft: #e8edf5;
+
+      --climb: #1e8e5a;
+      --climb-strong: #0f6b41;
+      --sink: #c2410c;
+      --sink-strong: #8a2a05;
+      --neutral-air: #8b8f94;
+
+      --airspace-ctr: #b3197a;
+      --airspace-tma: #2563a8;
+
+      --warn: #b45309;
     }
 
     @variant dark {
-      /* placeholder — app tokens go here */
+      /* Black-adjacent rather than grey: OLED pixels are off, not dim. */
+      --paper: #0b0c0d;
+      --paper-sunk: #141618;
+      --rule: #26292c;
+      --rule-strong: #3a3e42;
+
+      --ink: #f2f3f4;
+      --ink-muted: #9da3a8;
+      --ink-faint: #63696e;
+
+      --brand: #7fa8e0;
+      --brand-soft: #16202e;
+
+      --climb: #3fd08a;
+      --climb-strong: #6fe5ac;
+      --sink: #ff8a4c;
+      --sink-strong: #ffb088;
+      --neutral-air: #6e7478;
+
+      --airspace-ctr: #f062be;
+      --airspace-tma: #5fa0e8;
+
+      --warn: #e8a33d;
     }
   }
 }

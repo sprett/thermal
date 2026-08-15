@@ -2,13 +2,48 @@
 // importing it at the entry point forces a full reload instead of hot reload.
 import '../global.css';
 
+import {
+  InstrumentSans_400Regular,
+  InstrumentSans_500Medium,
+  InstrumentSans_600SemiBold,
+} from '@expo-google-fonts/instrument-sans';
+import {
+  MartianMono_400Regular,
+  MartianMono_500Medium,
+  MartianMono_600SemiBold,
+} from '@expo-google-fonts/martian-mono';
+import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { HeroUINativeProvider } from 'heroui-native';
+import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+SplashScreen.preventAutoHideAsync();
+
 export default function RootLayout() {
+  // Every flight number is set in Martian Mono. Rendering the HUD in a
+  // fallback face first would reflow every readout the moment the real font
+  // lands, so the splash holds until they are in.
+  const [fontsLoaded, fontError] = useFonts({
+    InstrumentSans_400Regular,
+    InstrumentSans_500Medium,
+    InstrumentSans_600SemiBold,
+    MartianMono_400Regular,
+    MartianMono_500Medium,
+    MartianMono_600SemiBold,
+  });
+
+  useEffect(() => {
+    // Hide on error too — a missing font is a degraded app, not a broken one,
+    // and holding the splash forever would be the worse failure.
+    if (fontsLoaded || fontError) SplashScreen.hideAsync();
+  }, [fontsLoaded, fontError]);
+
+  if (!fontsLoaded && !fontError) return null;
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
@@ -20,6 +55,15 @@ export default function RootLayout() {
           <StatusBar style="auto" />
           <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="(tabs)" />
+            <Stack.Screen
+              name="fly"
+              options={{
+                presentation: 'card',
+                animation: 'fade',
+                animationDuration: 320,
+                gestureEnabled: false,
+              }}
+            />
           </Stack>
         </HeroUINativeProvider>
       </SafeAreaProvider>
