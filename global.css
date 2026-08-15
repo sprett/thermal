@@ -1,0 +1,23 @@
+@import 'tailwindcss';
+@import 'uniwind';
+@import 'heroui-native/styles';
+
+/*
+ * HeroUI Native ships the full semantic token set already split across light and
+ * dark (see node_modules/heroui-native/lib/module/styles/variables.css), so
+ * `bg-background`, `text-foreground`, `border-border`, `text-muted` and friends
+ * switch theme on their own. Override any of them below to make the app ours —
+ * declare a token in BOTH variants or it will only be right in one of them.
+ */
+
+@layer theme {
+  :root {
+    @variant light {
+      /* placeholder — app tokens go here */
+    }
+
+    @variant dark {
+      /* placeholder — app tokens go here */
+    }
+  }
+}
