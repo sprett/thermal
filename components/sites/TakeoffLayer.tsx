@@ -3,6 +3,7 @@ import {
   Layer,
   type PressEventWithFeatures,
 } from '@maplibre/maplibre-react-native';
+import { useMemo } from 'react';
 import type { NativeSyntheticEvent } from 'react-native';
 
 import { takeoffsToGeoJSON, type Takeoff } from '../../lib/pgearth';
@@ -20,7 +21,7 @@ export function TakeoffLayer({
   paper: string;
   onSelect: (id: string) => void;
 }) {
-  const data = takeoffsToGeoJSON(takeoffs);
+  const data = useMemo(() => takeoffsToGeoJSON(takeoffs), [takeoffs]);
 
   return (
     <GeoJSONSource
