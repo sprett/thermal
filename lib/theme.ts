@@ -1,14 +1,5 @@
 import { useColorScheme } from 'react-native';
 
-/**
- * The palette, in JavaScript.
- *
- * `global.css` is the source of truth for anything styled with a class. This
- * mirrors it for the things that cannot take one: SVG fills and strokes, glass
- * tint colours, and native props. Keep the two in step — a token changed in one
- * and not the other shows up as a single wrong-coloured element, which is
- * exactly the kind of bug nobody notices until it ships.
- */
 const light = {
   paper: '#FCFCFA',
   paperSunk: '#F4F4F1',
@@ -28,7 +19,6 @@ const light = {
   warn: '#B45309',
 } as const;
 
-/** Values are plain strings; only the key set is fixed, so dark must be total. */
 export type Palette = Record<keyof typeof light, string>;
 
 const dark: Palette = {

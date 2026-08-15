@@ -3,11 +3,6 @@ import { Text, View } from 'react-native';
 import { LABEL, font } from '../../lib/type';
 import { GlassSurface } from '../glass/GlassSurface';
 
-/**
- * Satellite count and battery. Both are answers to "can I trust this for the
- * next three hours", which is why they sit together and stay visible rather
- * than hiding in a settings screen.
- */
 export function GpsChip({
   satellites,
   battery,

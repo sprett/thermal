@@ -10,15 +10,6 @@ const GAUGE_W = 28;
 
 export type VarioSample = { t: number; climb: number };
 
-/**
- * The altitude ribbon — the app's signature element, and the one piece of the
- * HUD that is data rather than decoration.
- *
- * Left band: the last 90 s of barometric altitude, filled and banded by
- * instantaneous climb rate, scrolling. Right gauge: the current climb needle
- * against a fixed scale, so the instant value and its recent history sit in one
- * glance without moving your eyes.
- */
 export function VarioTape({
   samples,
   climb,
@@ -34,8 +25,6 @@ export function VarioTape({
     ruleStrong: string;
   };
 }) {
-  // One path per band rather than per sample: the shape only changes when a
-  // fix lands, so this is rebuilt at 1 Hz, not per frame.
   const bands = useMemo(() => buildBands(samples), [samples]);
 
   const needle = climbToY(climb);
@@ -65,8 +54,6 @@ export function VarioTape({
             strokeWidth={1}
           />
         ))}
-        {/* The bar runs from the zero line to the current value, so its
-            direction alone reads as lift or sink before any number does. */}
         <Rect
           x={0}
           y={Math.min(needle, TAPE_H / 2)}
@@ -87,7 +74,6 @@ export function VarioTape({
   );
 }
 
-/** ±5 m/s spans the gauge; beyond that the bar simply pins. */
 function climbToY(climb: number): number {
   const clamped = Math.max(-5, Math.min(5, climb));
   return TAPE_H / 2 - (clamped / 5) * (TAPE_H / 2);

@@ -1,14 +1,6 @@
 import { NativeTabs } from 'expo-router/unstable-native-tabs';
 
-/**
- * A real UITabBar on iOS and a Material bottom nav on Android — the system
- * draws it, so the blur, the scroll-edge behaviour and the theme response are
- * the platform's, not a reimplementation of them.
- *
- * `index` is Fly — the map and the flight instrument on one surface, since a
- * pilot on launch is doing both at once. expo-router needs one route in the
- * group to own `/`, and Fly is where the app should open.
- */
+// `index` is Fly: expo-router needs one route in the group to own `/`.
 export default function TabsLayout() {
   return (
     <NativeTabs>

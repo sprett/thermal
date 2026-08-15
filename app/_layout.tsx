@@ -24,9 +24,6 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  // Every flight number is set in Martian Mono. Rendering the HUD in a
-  // fallback face first would reflow every readout the moment the real font
-  // lands, so the splash holds until they are in.
   const [fontsLoaded, fontError] = useFonts({
     InstrumentSans_400Regular,
     InstrumentSans_500Medium,
@@ -37,8 +34,7 @@ export default function RootLayout() {
   });
 
   useEffect(() => {
-    // Hide on error too — a missing font is a degraded app, not a broken one,
-    // and holding the splash forever would be the worse failure.
+    // Hide on error too, rather than holding the splash forever.
     if (fontsLoaded || fontError) SplashScreen.hideAsync();
   }, [fontsLoaded, fontError]);
 

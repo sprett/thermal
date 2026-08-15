@@ -3,14 +3,6 @@ import { Text, View } from 'react-native';
 import { LABEL, font } from '../../lib/type';
 import { GlassSurface } from '../glass/GlassSurface';
 
-/**
- * The one piece of chrome that is allowed to interrupt. It states the airspace
- * you are under and how much room is left, because "220 m below" is the number
- * that decides whether you keep climbing.
- *
- * The warn-coloured spine down the left edge is the only saturated colour up
- * here, so it reads before the text does.
- */
 export function AirspaceBanner({
   name,
   clearance,

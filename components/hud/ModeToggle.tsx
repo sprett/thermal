@@ -6,10 +6,6 @@ import { GlassSurface } from '../glass/GlassSurface';
 
 export type HudMode = 'map' | 'inst';
 
-/**
- * Map or instrument. Two states, so a segmented control rather than a menu —
- * the switch has to be hittable without looking at it.
- */
 export function ModeToggle({
   mode,
   onChange,
@@ -50,8 +46,7 @@ function Segment({
   brand: string;
   onPress: () => void;
 }) {
-  // The selected segment is solid, not glass. It has to survive being read
-  // against snow, forest and water in turn, and a translucent chip does not.
+  // Solid, not glass — it has to stay readable against any terrain.
   if (active) {
     return (
       <View

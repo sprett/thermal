@@ -16,27 +16,15 @@ type Props = {
   onLongPress?: () => void;
   accessibilityLabel: string;
   accessibilitySelected?: boolean;
-  /** Positioning. Size, shape and content layout belong in className. */
   style?: StyleProp<ViewStyle>;
   className?: string;
   glassStyle?: 'clear' | 'regular';
-  /** Tints the glass. Pass a translucent colour; a solid one hides the effect. */
+  /** Must be translucent; a solid colour hides the glass. */
   tintColor?: string;
   borderRadius?: number;
   disabled?: boolean;
 };
 
-/**
- * A control floating over the map.
- *
- * `isInteractive` is why this is separate from GlassSurface: it makes the
- * system deform and light the glass under a finger, which is what tells a pilot
- * in gloves that the thing is a button at all. It only means anything on real
- * Liquid Glass, so the fallback compensates with an explicit pressed state.
- *
- * Sizing follows the same measure-then-draw pattern as GlassSurface, and for
- * the same two reasons — see the note there.
- */
 export function GlassButton({
   children,
   onPress,
@@ -59,6 +47,7 @@ export function GlassButton({
     if (width !== size.width || height !== size.height) setSize({ width, height });
   };
 
+  // See GlassSurface: the glass has to be measured and sized in `style`.
   const glassReady = isLiquidGlassAvailable() && size.width > 0 && size.height > 0;
 
   return (

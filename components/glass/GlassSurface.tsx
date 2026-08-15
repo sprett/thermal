@@ -9,29 +9,6 @@ import {
 
 import { useThemeColors } from '../../lib/theme';
 
-/**
- * A panel of chrome floating over the map.
- *
- * Liquid Glass is iOS 26+ only, and `isLiquidGlassAvailable()` is the switch.
- * Where it doesn't exist we don't fake it: the fallback is a near-opaque paper
- * surface with a hairline, which reads as deliberate rather than as a degraded
- * effect.
- *
- * Two constraints shape this component, both learned the hard way:
- *
- * 1. Uniwind does not apply `className` to GlassView — it styles the components
- *    it wraps, and a third-party native view is not one of them. Anything the
- *    glass needs must arrive through `style`.
- * 2. GlassView takes its frame at mount and does not pick up a size that
- *    arrives later, so `absoluteFill` inside a class-sized parent leaves it at
- *    zero and it draws nothing.
- *
- * So the layout lives on a plain View, which we measure, and the glass is drawn
- * behind the content at that measured size.
- *
- * Both paths carry a paper tint: glass over a pale topo map has very little to
- * refract, and a panel you cannot see is worse than no glass at all.
- */
 export function GlassSurface({
   children,
   style,
@@ -42,7 +19,6 @@ export function GlassSurface({
 }: {
   children?: ReactNode;
   style?: StyleProp<ViewStyle>;
-  /** Sizing, shape and content layout of the panel. */
   className?: string;
   glassStyle?: 'clear' | 'regular';
   tintColor?: string;
@@ -57,6 +33,8 @@ export function GlassSurface({
     if (width !== size.width || height !== size.height) setSize({ width, height });
   };
 
+  // GlassView takes its frame at mount and ignores className, so it must be
+  // measured and sized in `style` or it renders nothing at all.
   const glassReady = isLiquidGlassAvailable() && size.width > 0 && size.height > 0;
 
   return (

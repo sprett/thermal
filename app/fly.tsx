@@ -18,18 +18,6 @@ import { VarioTape, type VarioSample } from '../components/hud/VarioTape';
 import { mapStyleUrl } from '../lib/maptiler';
 import { useScheme, useThemeColors } from '../lib/theme';
 
-/**
- * Frame 1a — the in-flight HUD.
- *
- * Everything here floats over a live map. The rule the design sets is that
- * chrome is glass and content is not: the panels refract the terrain behind
- * them, but every number sits on top at full contrast, because a readout you
- * cannot trust in sunlight is worse than no readout.
- *
- * The numbers below are placeholders on a timer. The sensor pipeline — EKF,
- * flight state machine, IGC writer — is not ported yet, so this proves the
- * surface, not the instrument.
- */
 export default function FlyScreen() {
   const colors = useThemeColors();
   const scheme = useScheme();
@@ -62,8 +50,6 @@ export default function FlyScreen() {
         </Map>
       </View>
 
-      {/* Chrome enters after the map, and from the edge it lives on, so the
-          HUD assembles around the terrain rather than covering it. */}
       <View
         style={{ top: insets.top + 8 }}
         className="absolute left-3 right-3"
@@ -111,11 +97,6 @@ export default function FlyScreen() {
   );
 }
 
-/**
- * Stand-in for the sensor pipeline. It exists so the tape scrolls and the
- * numbers move while the surface is being designed; delete it the moment
- * flight-core lands.
- */
 function useSimulatedFlight() {
   const [samples, setSamples] = useState<VarioSample[]>([]);
   const [readout, setReadout] = useState<Readout>({

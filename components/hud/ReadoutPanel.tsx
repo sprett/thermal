@@ -15,12 +15,6 @@ export type Readout = {
   distance: number;
 };
 
-/**
- * The instrument itself, in three tiers of decreasing urgency: climb and
- * altitude at a glance, the four supporting numbers below, and the two
- * session totals last. Every figure is Martian Mono and tabular, so a digit
- * changing never nudges its neighbours.
- */
 export function ReadoutPanel({
   data,
   ruleColor,
@@ -95,12 +89,8 @@ export function ReadoutPanel({
   );
 }
 
-/**
- * `color` is required, not optional. Passing `{ color: undefined }` in a style
- * object still counts as a style, and the style prop outranks className — so an
- * absent colour silently cancelled `text-ink` and the number fell back to
- * black, invisible on the dark panel. Resolve it once, explicitly.
- */
+// `color` is required: `{ color: undefined }` still counts as a style, and
+// style outranks className, so an absent colour cancels `text-ink`.
 function Cell({
   label,
   value,
@@ -145,7 +135,6 @@ function Total({ label, value }: { label: string; value: string }) {
   );
 }
 
-/** A vario reading without its sign is ambiguous, so the plus is never dropped. */
 function signed(value: number, digits: number): string {
   return `${value >= 0 ? '+' : ''}${value.toFixed(digits)}`;
 }

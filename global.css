@@ -2,20 +2,8 @@
 @import 'uniwind';
 @import 'heroui-native/styles';
 
-/*
- * HeroUI Native ships the full semantic token set already split across light and
- * dark (see node_modules/heroui-native/lib/module/styles/variables.css), so
- * `bg-background`, `text-foreground` and friends switch theme on their own.
- *
- * Below are Thermal's own tokens, taken from the design's palette. They follow
- * HeroUI's pattern deliberately: declare the utility in `@theme inline static`
- * pointing at a plain variable, then set that variable once per variant. A
- * token declared in only one variant is a bug you will only see in the other.
- *
- * Colours derive from ICAO chart conventions so the semantics are already
- * familiar to a pilot. Magenta is reserved for airspace and is never a brand
- * accent — a semantic collision on a safety surface is a real hazard.
- */
+/* Thermal's tokens. Declare each utility in `@theme inline static` pointing at
+   a plain variable, then set that variable in BOTH variants. */
 
 @theme inline static {
   --color-paper: var(--paper);
@@ -54,7 +42,6 @@
       --ink-muted: #6b6f73;
       --ink-faint: #9ba0a4;
 
-      /* "QNH blue" — the ink of an altimeter subscale. */
       --brand: #1b3a6b;
       --brand-soft: #e8edf5;
 
@@ -71,7 +58,6 @@
     }
 
     @variant dark {
-      /* Black-adjacent rather than grey: OLED pixels are off, not dim. */
       --paper: #0b0c0d;
       --paper-sunk: #141618;
       --rule: #26292c;

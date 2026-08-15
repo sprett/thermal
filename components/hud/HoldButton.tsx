@@ -12,14 +12,6 @@ import { LABEL } from '../../lib/type';
 
 const HOLD_MS = 900;
 
-/**
- * Stop recording — deliberately a hold, not a tap.
- *
- * Ending a flight by accident costs the flight, and this button lives on a
- * surface being operated with gloves, in turbulence, sometimes by a hand that
- * is also on a brake toggle. The fill sweeping up the button is the feedback
- * that the hold registered; releasing early cancels it, visibly.
- */
 export function HoldButton({
   onHoldComplete,
   tint,
@@ -58,8 +50,6 @@ export function HoldButton({
       className="h-16 w-16 overflow-hidden rounded-xl"
       style={{ backgroundColor: `${tint}DB` }}
     >
-      {/* Rises from the bottom, so the gesture reads as filling something up
-          rather than draining it. */}
       <Animated.View
         pointerEvents="none"
         style={[
