@@ -6,6 +6,7 @@ import {
   NativeUserLocation,
   useCurrentPosition,
   type CameraRef,
+  type MapRef,
 } from '@maplibre/maplibre-react-native';
 import * as Location from 'expo-location';
 import { router } from 'expo-router';
@@ -14,6 +15,9 @@ import { Pressable, Text, useColorScheme, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { GlassButton } from '../../components/glass/GlassButton';
+import { SiteSheet } from '../../components/sites/SiteSheet';
+import { TakeoffLayer } from '../../components/sites/TakeoffLayer';
+import { useTakeoffSites } from '../../hooks/useTakeoffSites';
 import { hasMapTilerKey, mapStyleUrl } from '../../lib/maptiler';
 import { useThemeColors } from '../../lib/theme';
 import { font } from '../../lib/type';
@@ -34,8 +38,20 @@ export default function FlyScreen() {
   const insets = useSafeAreaInsets();
 
   const cameraRef = useRef<CameraRef>(null);
+  const mapRef = useRef<MapRef>(null);
   const [granted, setGranted] = useState(false);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
   const position = useCurrentPosition({ enabled: granted });
+  const { takeoffs, onViewState } = useTakeoffSites();
+
+  const selected =
+    takeoffs.find((site) => site.id === selectedId) ?? null;
+
+  useEffect(() => {
+    if (selectedId && !takeoffs.some((site) => site.id === selectedId)) {
+      setSelectedId(null);
+    }
+  }, [takeoffs, selectedId]);
 
   useEffect(() => {
     // iOS offers this dialog once; don't spend it on a screen with no map.
@@ -62,20 +78,51 @@ export default function FlyScreen() {
     });
   };
 
+  const syncView = () => {
+    mapRef.current?.getViewState().then((view) => {
+      if (view) onViewState(view);
+    });
+  };
+
   return (
     <View className="flex-1 bg-background">
       <Map
+        ref={mapRef}
         style={{ flex: 1 }}
         mapStyle={mapStyleUrl(scheme)}
         logo={false}
         attributionPosition={{ bottom: insets.bottom + 8, left: 8 }}
+        onDidFinishLoadingMap={syncView}
+        onRegionDidChange={(event) => onViewState(event.nativeEvent)}
+        onPress={() => setSelectedId(null)}
       >
         <Camera
           ref={cameraRef}
           initialViewState={{ center: INITIAL_CENTER, zoom: INITIAL_ZOOM }}
         />
         {granted ? <NativeUserLocation mode="heading" /> : null}
+        <TakeoffLayer
+          takeoffs={takeoffs}
+          selectedId={selectedId}
+          brand={colors.brand}
+          paper={colors.paper}
+          onSelect={setSelectedId}
+        />
       </Map>
+
+      <Text
+        pointerEvents="none"
+        style={{
+          position: 'absolute',
+          left: 8,
+          bottom: insets.bottom + 28,
+          fontFamily: font.sans,
+          fontSize: 11,
+        }}
+        className="text-ink-faint"
+      >
+        ParaglidingEarth
+      </Text>
 
       {granted ? (
         <Pressable
@@ -104,6 +151,12 @@ export default function FlyScreen() {
           Fly
         </Text>
       </GlassButton>
+
+      <SiteSheet
+        site={selected}
+        bottomInset={insets.bottom}
+        onClose={() => setSelectedId(null)}
+      />
     </View>
   );
 }
