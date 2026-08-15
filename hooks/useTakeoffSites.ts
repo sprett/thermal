@@ -27,27 +27,34 @@ export function useTakeoffSites() {
       const bbox = bboxFromLngLatBounds(view.bounds);
       const action = shouldLoadTakeoffs(view.zoom, bbox, loadedBBox.current);
 
-      if (action === 'keep') return;
-
       abortRef.current?.abort();
 
-      if (action === 'clear') {
-        loadedBBox.current = null;
-        setTakeoffs([]);
-        return;
+      switch (action) {
+        case 'keep':
+          return;
+        case 'clear':
+          loadedBBox.current = null;
+          setTakeoffs([]);
+          return;
+        case 'fetch': {
+          const ac = new AbortController();
+          abortRef.current = ac;
+          fetchTakeoffs(bbox, ac.signal)
+            .then((sites) => {
+              if (ac.signal.aborted) return;
+              loadedBBox.current = bbox;
+              setTakeoffs(sites);
+            })
+            .catch((err: unknown) => {
+              if (err instanceof Error && err.name === 'AbortError') return;
+            });
+          return;
+        }
+        default: {
+          const _exhaustive: never = action;
+          return _exhaustive;
+        }
       }
-
-      const ac = new AbortController();
-      abortRef.current = ac;
-      fetchTakeoffs(bbox, ac.signal)
-        .then((sites) => {
-          if (ac.signal.aborted) return;
-          loadedBBox.current = bbox;
-          setTakeoffs(sites);
-        })
-        .catch((err: unknown) => {
-          if (err instanceof Error && err.name === 'AbortError') return;
-        });
     }, TAKEOFF_DEBOUNCE_MS);
   }, []);
 
