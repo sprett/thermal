@@ -45,7 +45,7 @@
     "web": "expo start --web",
     "prebuild": "expo prebuild --clean",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test lib/pgearth.test.ts"
+    "test": "tsx --test lib/*.test.ts"
   },
   "private": true
 }
