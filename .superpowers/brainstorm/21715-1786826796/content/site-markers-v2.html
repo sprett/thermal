@@ -1,0 +1,98 @@
+<h2>How should flying sites look on the planning map?</h2>
+<p class="subtitle">This is the Fly tab — before you start a flight. Weather-on-tap comes later; this is just how spots appear.</p>
+
+<div class="cards">
+  <div class="card" data-choice="dots" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <svg viewBox="0 0 280 175" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gA" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#c5d4b8"/>
+            <stop offset="45%" stop-color="#8eab78"/>
+            <stop offset="100%" stop-color="#6b8f7a"/>
+          </linearGradient>
+        </defs>
+        <rect width="280" height="175" fill="url(#gA)"/>
+        <path d="M0 140 L40 88 L78 108 L120 52 L170 96 L220 70 L280 90 L280 175 L0 175 Z" fill="#7a9a6a" opacity="0.55"/>
+        <ellipse cx="210" cy="138" rx="52" ry="24" fill="#6a9aaa" opacity="0.75"/>
+        <circle cx="98" cy="58" r="6" fill="#1B3A6B" stroke="#FCFCFA" stroke-width="2"/>
+        <circle cx="158" cy="78" r="6" fill="#1B3A6B" stroke="#FCFCFA" stroke-width="2"/>
+        <circle cx="128" cy="112" r="6" fill="#1B3A6B" stroke="#FCFCFA" stroke-width="2"/>
+        <circle cx="148" cy="96" r="6" fill="#2563A8" stroke="#FCFCFA" stroke-width="3"/>
+        <rect x="208" y="138" width="56" height="22" rx="11" fill="#1B3A6B"/>
+        <text x="236" y="153" text-anchor="middle" fill="#FCFCFA" font-family="system-ui,sans-serif" font-size="12" font-weight="600">Fly</text>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>A · Quiet dots</h3>
+      <p>Small brand marks. Terrain stays readable. Names wait for a later tap or closer zoom.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="named" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <svg viewBox="0 0 280 175" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gB" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#c5d4b8"/>
+            <stop offset="45%" stop-color="#8eab78"/>
+            <stop offset="100%" stop-color="#6b8f7a"/>
+          </linearGradient>
+        </defs>
+        <rect width="280" height="175" fill="url(#gB)"/>
+        <path d="M0 140 L40 88 L78 108 L120 52 L170 96 L220 70 L280 90 L280 175 L0 175 Z" fill="#7a9a6a" opacity="0.55"/>
+        <ellipse cx="210" cy="138" rx="52" ry="24" fill="#6a9aaa" opacity="0.75"/>
+        <circle cx="86" cy="50" r="5" fill="#1B3A6B" stroke="#FCFCFA" stroke-width="2"/>
+        <rect x="96" y="38" width="52" height="28" rx="4" fill="rgba(252,252,250,0.92)"/>
+        <text x="122" y="51" text-anchor="middle" fill="#16181A" font-family="system-ui,sans-serif" font-size="11" font-weight="700">Voss</text>
+        <text x="122" y="62" text-anchor="middle" fill="#6B6F73" font-family="system-ui,sans-serif" font-size="9">580 m</text>
+        <circle cx="154" cy="78" r="5" fill="#1B3A6B" stroke="#FCFCFA" stroke-width="2"/>
+        <rect x="164" y="66" width="62" height="28" rx="4" fill="rgba(252,252,250,0.92)"/>
+        <text x="195" y="79" text-anchor="middle" fill="#16181A" font-family="system-ui,sans-serif" font-size="11" font-weight="700">Bømoen</text>
+        <text x="195" y="90" text-anchor="middle" fill="#6B6F73" font-family="system-ui,sans-serif" font-size="9">320 m</text>
+        <circle cx="118" cy="118" r="5" fill="#1B3A6B" stroke="#FCFCFA" stroke-width="2"/>
+        <rect x="128" y="106" width="68" height="28" rx="4" fill="rgba(252,252,250,0.92)"/>
+        <text x="162" y="119" text-anchor="middle" fill="#16181A" font-family="system-ui,sans-serif" font-size="11" font-weight="700">Mjølfjell</text>
+        <text x="162" y="130" text-anchor="middle" fill="#6B6F73" font-family="system-ui,sans-serif" font-size="9">710 m</text>
+        <circle cx="148" cy="96" r="6" fill="#2563A8" stroke="#FCFCFA" stroke-width="3"/>
+        <rect x="208" y="138" width="56" height="22" rx="11" fill="#1B3A6B"/>
+        <text x="236" y="153" text-anchor="middle" fill="#FCFCFA" font-family="system-ui,sans-serif" font-size="12" font-weight="600">Fly</text>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>B · Named pins</h3>
+      <p>Name + takeoff altitude on the map. Easier to plan at a glance; busier when many sites overlap.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="typed" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <svg viewBox="0 0 280 175" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gC" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#c5d4b8"/>
+            <stop offset="45%" stop-color="#8eab78"/>
+            <stop offset="100%" stop-color="#6b8f7a"/>
+          </linearGradient>
+        </defs>
+        <rect width="280" height="175" fill="url(#gC)"/>
+        <path d="M0 140 L40 88 L78 108 L120 52 L170 96 L220 70 L280 90 L280 175 L0 175 Z" fill="#7a9a6a" opacity="0.55"/>
+        <ellipse cx="210" cy="138" rx="52" ry="24" fill="#6a9aaa" opacity="0.75"/>
+        <polygon points="98,42 110,64 86,64" fill="#1B3A6B" stroke="#FCFCFA" stroke-width="1.5"/>
+        <rect x="80" y="68" width="44" height="12" rx="3" fill="rgba(252,252,250,0.9)"/>
+        <text x="102" y="77" text-anchor="middle" fill="#16181A" font-family="system-ui,sans-serif" font-size="8" font-weight="700" letter-spacing="0.6">TAKEOFF</text>
+        <circle cx="168" cy="92" r="7" fill="#1E8E5A" stroke="#FCFCFA" stroke-width="2"/>
+        <rect x="148" y="104" width="44" height="12" rx="3" fill="rgba(252,252,250,0.9)"/>
+        <text x="170" y="113" text-anchor="middle" fill="#16181A" font-family="system-ui,sans-serif" font-size="8" font-weight="700" letter-spacing="0.6">LANDING</text>
+        <polygon points="128,108 140,130 116,130" fill="#1B3A6B" stroke="#FCFCFA" stroke-width="1.5"/>
+        <circle cx="148" cy="96" r="6" fill="#2563A8" stroke="#FCFCFA" stroke-width="3"/>
+        <rect x="208" y="138" width="56" height="22" rx="11" fill="#1B3A6B"/>
+        <text x="236" y="153" text-anchor="middle" fill="#FCFCFA" font-family="system-ui,sans-serif" font-size="12" font-weight="600">Fly</text>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>C · Takeoff vs landing</h3>
+      <p>Triangle for takeoff, disc for landing. Type is obvious; names still wait for tap.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<h2>Architecture — does this look right?</h2>
+<p class="subtitle">Planning map only. In-flight HUD stays empty of sites.</p>
+
+<div class="mockup">
+  <div class="mockup-header">Data flow</div>
+  <div class="mockup-body" style="padding:1rem;">
+    <svg viewBox="0 0 720 280" width="100%" xmlns="http://www.w3.org/2000/svg" style="max-height:280px;">
+      <defs>
+        <style>
+          .box { fill: #ffffff; stroke: #d1d1d6; stroke-width: 1.5; }
+          .box-accent { fill: #e8f4fd; stroke: #1B3A6B; stroke-width: 1.5; }
+          .t { font-family: system-ui, sans-serif; fill: #1d1d1f; }
+          .s { font-family: system-ui, sans-serif; fill: #86868b; font-size: 11px; }
+          .h { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 650; fill: #1d1d1f; }
+          .arr { stroke: #86868b; stroke-width: 1.5; fill: none; marker-end: url(#ah); }
+        </style>
+        <marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8" fill="none" stroke="#86868b" stroke-width="1.5"/>
+        </marker>
+      </defs>
+
+      <rect x="16" y="24" width="150" height="64" rx="10" class="box"/>
+      <text x="91" y="50" text-anchor="middle" class="h">Map pan/zoom</text>
+      <text x="91" y="68" text-anchor="middle" class="s">onRegionDidChange</text>
+
+      <path d="M166 56 H214" class="arr"/>
+
+      <rect x="214" y="24" width="170" height="64" rx="10" class="box-accent"/>
+      <text x="299" y="50" text-anchor="middle" class="h">useTakeoffSites</text>
+      <text x="299" y="68" text-anchor="middle" class="s">debounce · min zoom 8</text>
+
+      <path d="M384 56 H432" class="arr"/>
+
+      <rect x="432" y="24" width="170" height="64" rx="10" class="box"/>
+      <text x="517" y="50" text-anchor="middle" class="h">lib/pgearth</text>
+      <text x="517" y="68" text-anchor="middle" class="s">HTTPS bbox GeoJSON</text>
+
+      <path d="M602 56 H640" class="arr"/>
+
+      <rect x="640" y="16" width="64" height="80" rx="10" class="box"/>
+      <text x="672" y="52" text-anchor="middle" class="h" font-size="11">PGE</text>
+      <text x="672" y="70" text-anchor="middle" class="s">API</text>
+
+      <path d="M299 88 V128" class="arr"/>
+
+      <rect x="214" y="128" width="170" height="64" rx="10" class="box-accent"/>
+      <text x="299" y="154" text-anchor="middle" class="h">GeoJSONSource</text>
+      <text x="299" y="172" text-anchor="middle" class="s">navy CircleLayer</text>
+
+      <path d="M384 160 H432" class="arr"/>
+
+      <rect x="432" y="128" width="170" height="64" rx="10" class="box"/>
+      <text x="517" y="154" text-anchor="middle" class="h">tap site</text>
+      <text x="517" y="172" text-anchor="middle" class="s">source onPress</text>
+
+      <path d="M517 192 V228" class="arr"/>
+
+      <rect x="432" y="228" width="170" height="40" rx="10" class="box-accent"/>
+      <text x="517" y="254" text-anchor="middle" class="h">SiteSheet</text>
+    </svg>
+  </div>
+</div>
+
+<div class="section">
+  <p class="subtitle" style="margin-bottom:0.5rem;">Lives in the Fly tab. Never on the in-flight HUD.</p>
+  <p class="subtitle">Failed fetch keeps the last good dots. Zoomed out past 8 → no request, dots clear. CC BY-SA: small “ParaglidingEarth” credit near MapTiler attribution.</p>
+</div>

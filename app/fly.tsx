@@ -6,17 +6,36 @@ import {
 } from '@maplibre/maplibre-react-native';
 import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { useWindowDimensions, View } from 'react-native';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+} from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { AirspaceBanner } from '../components/hud/AirspaceBanner';
 import { GpsChip } from '../components/hud/GpsChip';
 import { HoldButton } from '../components/hud/HoldButton';
 import { ModeToggle, type HudMode } from '../components/hud/ModeToggle';
-import { ReadoutPanel, type Readout } from '../components/hud/ReadoutPanel';
+import {
+  READOUT_PEEK,
+  ReadoutSheet,
+  type Readout,
+} from '../components/hud/ReadoutSheet';
 import { VarioTape, type VarioSample } from '../components/hud/VarioTape';
 import { mapStyleUrl } from '../lib/maptiler';
 import { useScheme, useThemeColors } from '../lib/theme';
+
+const HOLD_SIZE = 64;
+const HOLD_GAP = 16;
+
+function leaveFlight() {
+  if (router.canGoBack()) {
+    router.back();
+    return;
+  }
+  router.replace('/');
+}
 
 export default function FlyScreen() {
   const colors = useThemeColors();
@@ -24,6 +43,13 @@ export default function FlyScreen() {
   const insets = useSafeAreaInsets();
 
   const [mode, setMode] = useState<HudMode>('map');
+  const { height: windowHeight } = useWindowDimensions();
+  const sheetPosition = useSharedValue(windowHeight - READOUT_PEEK);
+  const holdStyle = useAnimatedStyle(() => ({
+    position: 'absolute' as const,
+    right: 20,
+    top: sheetPosition.value - HOLD_SIZE - HOLD_GAP,
+  }));
   const { readout, samples } = useSimulatedFlight();
   const position = useCurrentPosition({ enabled: true });
 
@@ -76,23 +102,17 @@ export default function FlyScreen() {
         <GpsChip satellites={11} battery={64} ruleColor={colors.rule} />
       </View>
 
-      <View
-        style={{ bottom: insets.bottom + 336 }}
-        className="absolute right-5"
-      >
-        <HoldButton tint={colors.sink} onHoldComplete={() => router.back()} />
-      </View>
+      <ReadoutSheet
+        data={readout}
+        ruleColor={colors.rule}
+        climbColor={readout.avg30 >= 0 ? colors.climb : colors.sink}
+        bottomInset={insets.bottom}
+        animatedPosition={sheetPosition}
+      />
 
-      <View
-        style={{ bottom: insets.bottom + 8 }}
-        className="absolute left-2 right-2"
-      >
-        <ReadoutPanel
-          data={readout}
-          ruleColor={colors.rule}
-          climbColor={readout.avg30 >= 0 ? colors.climb : colors.sink}
-        />
-      </View>
+      <Animated.View style={holdStyle}>
+        <HoldButton tint={colors.sink} onHoldComplete={leaveFlight} />
+      </Animated.View>
     </View>
   );
 }

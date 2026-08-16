@@ -41,6 +41,7 @@ export function GlassSurface({
     <View style={style} className={className} onLayout={onLayout}>
       {glassReady ? (
         <GlassView
+          pointerEvents="none"
           style={{
             position: 'absolute',
             left: 0,
@@ -54,6 +55,7 @@ export function GlassSurface({
         />
       ) : (
         <View
+          pointerEvents="none"
           style={{
             position: 'absolute',
             left: 0,

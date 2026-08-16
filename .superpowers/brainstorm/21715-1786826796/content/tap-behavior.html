@@ -1,0 +1,92 @@
+<h2>What happens when you tap a site — this version?</h2>
+<p class="subtitle">Quiet dots stay on the map. Weather comes later. This is only whether a tap identifies the site now.</p>
+
+<div class="cards">
+  <div class="card" data-choice="nothing" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <svg viewBox="0 0 280 175" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="tA" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#c5d4b8"/>
+            <stop offset="45%" stop-color="#8eab78"/>
+            <stop offset="100%" stop-color="#6b8f7a"/>
+          </linearGradient>
+        </defs>
+        <rect width="280" height="175" fill="url(#tA)"/>
+        <path d="M0 140 L40 88 L78 108 L120 52 L170 96 L220 70 L280 90 L280 175 L0 175 Z" fill="#7a9a6a" opacity="0.55"/>
+        <ellipse cx="210" cy="138" rx="52" ry="24" fill="#6a9aaa" opacity="0.75"/>
+        <circle cx="98" cy="58" r="6" fill="#1B3A6B" stroke="#FCFCFA" stroke-width="2"/>
+        <circle cx="158" cy="78" r="6" fill="#1B3A6B" stroke="#FCFCFA" stroke-width="2"/>
+        <circle cx="128" cy="112" r="6" fill="#1B3A6B" stroke="#FCFCFA" stroke-width="2"/>
+        <circle cx="148" cy="96" r="6" fill="#2563A8" stroke="#FCFCFA" stroke-width="3"/>
+        <rect x="208" y="138" width="56" height="22" rx="11" fill="#1B3A6B"/>
+        <text x="236" y="153" text-anchor="middle" fill="#FCFCFA" font-family="system-ui,sans-serif" font-size="12" font-weight="600">Fly</text>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>A · Markers only</h3>
+      <p>Tap does nothing yet. Fastest to ship. Sites stay anonymous until the weather work lands.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="callout" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <svg viewBox="0 0 280 175" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="tB" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#c5d4b8"/>
+            <stop offset="45%" stop-color="#8eab78"/>
+            <stop offset="100%" stop-color="#6b8f7a"/>
+          </linearGradient>
+        </defs>
+        <rect width="280" height="175" fill="url(#tB)"/>
+        <path d="M0 140 L40 88 L78 108 L120 52 L170 96 L220 70 L280 90 L280 175 L0 175 Z" fill="#7a9a6a" opacity="0.55"/>
+        <ellipse cx="210" cy="138" rx="52" ry="24" fill="#6a9aaa" opacity="0.75"/>
+        <circle cx="98" cy="58" r="6" fill="#1B3A6B" stroke="#FCFCFA" stroke-width="2"/>
+        <circle cx="158" cy="78" r="8" fill="#1B3A6B" stroke="#FCFCFA" stroke-width="3"/>
+        <circle cx="128" cy="112" r="6" fill="#1B3A6B" stroke="#FCFCFA" stroke-width="2"/>
+        <rect x="128" y="18" width="92" height="36" rx="6" fill="rgba(252,252,250,0.95)"/>
+        <polygon points="158,54 164,62 152,54" fill="rgba(252,252,250,0.95)"/>
+        <text x="174" y="34" text-anchor="middle" fill="#16181A" font-family="system-ui,sans-serif" font-size="12" font-weight="700">Bømoen</text>
+        <text x="174" y="47" text-anchor="middle" fill="#6B6F73" font-family="system-ui,sans-serif" font-size="10">takeoff · 320 m</text>
+        <circle cx="148" cy="96" r="6" fill="#2563A8" stroke="#FCFCFA" stroke-width="3"/>
+        <rect x="208" y="138" width="56" height="22" rx="11" fill="#1B3A6B"/>
+        <text x="236" y="153" text-anchor="middle" fill="#FCFCFA" font-family="system-ui,sans-serif" font-size="12" font-weight="600">Fly</text>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>B · Callout on the pin</h3>
+      <p>Tap shows name and altitude next to the dot. Map stays in view. Weather can drop into the same bubble later.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="sheet" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <svg viewBox="0 0 280 175" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="tC" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#c5d4b8"/>
+            <stop offset="45%" stop-color="#8eab78"/>
+            <stop offset="100%" stop-color="#6b8f7a"/>
+          </linearGradient>
+        </defs>
+        <rect width="280" height="175" fill="url(#tC)"/>
+        <path d="M0 140 L40 88 L78 108 L120 52 L170 96 L220 70 L280 90 L280 175 L0 175 Z" fill="#7a9a6a" opacity="0.55"/>
+        <ellipse cx="210" cy="118" rx="52" ry="18" fill="#6a9aaa" opacity="0.5"/>
+        <circle cx="98" cy="48" r="5" fill="#1B3A6B" stroke="#FCFCFA" stroke-width="2"/>
+        <circle cx="158" cy="68" r="7" fill="#1B3A6B" stroke="#FCFCFA" stroke-width="3"/>
+        <circle cx="128" cy="92" r="5" fill="#1B3A6B" stroke="#FCFCFA" stroke-width="2"/>
+        <rect x="8" y="108" width="264" height="67" rx="14" fill="rgba(252,252,250,0.94)"/>
+        <rect x="124" y="116" width="32" height="4" rx="2" fill="#C4C4BC"/>
+        <text x="24" y="140" fill="#16181A" font-family="system-ui,sans-serif" font-size="14" font-weight="700">Bømoen</text>
+        <text x="24" y="156" fill="#6B6F73" font-family="system-ui,sans-serif" font-size="11">takeoff · 320 m · N–NE</text>
+        <rect x="196" y="138" width="56" height="22" rx="11" fill="#1B3A6B"/>
+        <text x="224" y="153" text-anchor="middle" fill="#FCFCFA" font-family="system-ui,sans-serif" font-size="12" font-weight="600">Fly</text>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>C · Bottom sheet</h3>
+      <p>Tap opens a sheet with name, altitude, wind directions. Room for weather later; more UI now.</p>
+    </div>
+  </div>
+</div>

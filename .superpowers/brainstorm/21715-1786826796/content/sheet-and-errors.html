@@ -1,0 +1,79 @@
+<h2>Sheet + empty states — look right?</h2>
+<p class="subtitle">Tap a navy dot. Weather is not in this slice — just identity, height, wind, landing if PGE has one.</p>
+
+<div class="split">
+  <div class="mockup">
+    <div class="mockup-header">Selected takeoff</div>
+    <div class="mockup-body" style="padding:0;background:#8eab78;">
+      <svg viewBox="0 0 320 420" width="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="mapg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#c5d4b8"/>
+            <stop offset="100%" stop-color="#6b8f7a"/>
+          </linearGradient>
+        </defs>
+        <rect width="320" height="420" fill="url(#mapg)"/>
+        <path d="M0 220 L60 140 L120 170 L180 90 L260 150 L320 120 L320 420 L0 420 Z" fill="#7a9a6a" opacity="0.45"/>
+        <circle cx="118" cy="128" r="6" fill="#1B3A6B" stroke="#FCFCFA" stroke-width="2"/>
+        <circle cx="168" cy="148" r="9" fill="#1B3A6B" stroke="#FCFCFA" stroke-width="3"/>
+        <circle cx="210" cy="188" r="6" fill="#1B3A6B" stroke="#FCFCFA" stroke-width="2"/>
+        <circle cx="160" cy="168" r="6" fill="#2563A8" stroke="#FCFCFA" stroke-width="3"/>
+
+        <rect x="12" y="210" width="296" height="198" rx="18" fill="rgba(252,252,250,0.94)"/>
+        <rect x="144" y="220" width="32" height="4" rx="2" fill="#C4C4BC"/>
+
+        <text x="28" y="258" fill="#9BA0A4" font-family="system-ui,sans-serif" font-size="9" font-weight="700" letter-spacing="1.6">TAKEOFF</text>
+        <text x="28" y="284" fill="#16181A" font-family="system-ui,sans-serif" font-size="22" font-weight="650">Bjørnestigen</text>
+        <text x="292" y="258" text-anchor="end" fill="#9BA0A4" font-family="system-ui,sans-serif" font-size="9" font-weight="700" letter-spacing="1.6">ALT M</text>
+        <text x="292" y="284" text-anchor="end" fill="#16181A" font-family="ui-monospace,Menlo,monospace" font-size="22" font-weight="700">560</text>
+
+        <g transform="translate(160 338)">
+          <circle r="36" fill="none" stroke="#E2E2DC" stroke-width="1"/>
+          <!-- N good? sample was W=2. Draw 8 ticks: N NE E SE S SW W NW -->
+          <g stroke-linecap="round">
+            <line x1="0" y1="-32" x2="0" y2="-22" stroke="#C4C4BC" stroke-width="3"/>
+            <line x1="22.6" y1="-22.6" x2="15.6" y2="-15.6" stroke="#C4C4BC" stroke-width="3"/>
+            <line x1="32" y1="0" x2="22" y2="0" stroke="#C4C4BC" stroke-width="3"/>
+            <line x1="22.6" y1="22.6" x2="15.6" y2="15.6" stroke="#C4C4BC" stroke-width="3"/>
+            <line x1="0" y1="32" x2="0" y2="22" stroke="#C4C4BC" stroke-width="3"/>
+            <line x1="-22.6" y1="22.6" x2="-15.6" y2="15.6" stroke="#C4C4BC" stroke-width="3"/>
+            <line x1="-32" y1="0" x2="-22" y2="0" stroke="#1B3A6B" stroke-width="5"/>
+            <line x1="-22.6" y1="-22.6" x2="-15.6" y2="-15.6" stroke="#C4C4BC" stroke-width="3"/>
+          </g>
+          <text y="4" text-anchor="middle" fill="#6B6F73" font-family="system-ui,sans-serif" font-size="9" font-weight="700">W</text>
+        </g>
+
+        <text x="28" y="388" fill="#6B6F73" font-family="system-ui,sans-serif" font-size="12">No landing listed</text>
+        <rect x="232" y="368" width="56" height="26" rx="13" fill="#1B3A6B"/>
+        <text x="260" y="385" text-anchor="middle" fill="#FCFCFA" font-family="system-ui,sans-serif" font-size="13" font-weight="600">Fly</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-header">Rules</div>
+    <div class="mockup-body">
+      <p><strong>On the sheet</strong></p>
+      <ul style="color:var(--text-secondary);font-size:0.9rem;margin:0.4rem 0 1rem 1.1rem;">
+        <li>Name · takeoff altitude</li>
+        <li>Wind rose: 0 faint, 1 possible, 2 good (navy)</li>
+        <li>Landing line only if PGE sent coordinates</li>
+        <li>No weather row, no PGE deep-link</li>
+      </ul>
+      <p><strong>Around it</strong></p>
+      <ul style="color:var(--text-secondary);font-size:0.9rem;margin:0.4rem 0 1rem 1.1rem;">
+        <li>Fly stays on top of the sheet (same as the in-flight hold button)</li>
+        <li>Tap empty map → sheet closes</li>
+        <li>Tap another site → contents swap</li>
+        <li>Selected dot is slightly larger</li>
+      </ul>
+      <p><strong>When things fail</strong></p>
+      <ul style="color:var(--text-secondary);font-size:0.9rem;margin:0.4rem 0 0 1.1rem;">
+        <li>First load: map with no dots until PGE answers — no spinner</li>
+        <li>Later failure: keep last good dots, no toast</li>
+        <li>Zoom &lt; 8: dots clear, no request</li>
+        <li>Empty valley: empty map, that’s fine</li>
+      </ul>
+    </div>
+  </div>
+</div>

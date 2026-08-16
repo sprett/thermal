@@ -1,0 +1,204 @@
+<h2>How should flying sites look on the planning map?</h2>
+<p class="subtitle">This is the Fly tab — before you start a flight. Weather-on-tap comes later; this is just how spots appear.</p>
+
+<div class="cards">
+  <div class="card" data-choice="dots" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="phone">
+        <div class="map">
+          <div class="ridge"></div>
+          <div class="lake"></div>
+          <span class="dot" style="left:38%;top:32%"></span>
+          <span class="dot" style="left:58%;top:44%"></span>
+          <span class="dot" style="left:46%;top:61%"></span>
+          <span class="you" style="left:52%;top:52%"></span>
+          <div class="fly-btn">Fly</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A · Quiet dots</h3>
+      <p>Small brand marks. Terrain stays readable. Names wait for a later tap or closer zoom.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="named" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="phone">
+        <div class="map">
+          <div class="ridge"></div>
+          <div class="lake"></div>
+          <div class="named" style="left:28%;top:26%">
+            <span class="pin"></span>
+            <span class="label">Voss<br><em>580 m</em></span>
+          </div>
+          <div class="named" style="left:52%;top:40%">
+            <span class="pin"></span>
+            <span class="label">Bømoen<br><em>320 m</em></span>
+          </div>
+          <div class="named" style="left:40%;top:58%">
+            <span class="pin"></span>
+            <span class="label">Mjølfjell<br><em>710 m</em></span>
+          </div>
+          <span class="you" style="left:52%;top:52%"></span>
+          <div class="fly-btn">Fly</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B · Named pins</h3>
+      <p>Name + takeoff altitude on the map. Easier to plan at a glance; busier when many sites overlap.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="typed" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="phone">
+        <div class="map">
+          <div class="ridge"></div>
+          <div class="lake"></div>
+          <div class="typed" style="left:36%;top:28%">
+            <span class="tri"></span>
+            <span class="tlabel">takeoff</span>
+          </div>
+          <div class="typed land" style="left:54%;top:48%">
+            <span class="circ"></span>
+            <span class="tlabel">landing</span>
+          </div>
+          <div class="typed" style="left:44%;top:62%">
+            <span class="tri"></span>
+          </div>
+          <span class="you" style="left:52%;top:52%"></span>
+          <div class="fly-btn">Fly</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C · Takeoff vs landing</h3>
+      <p>Triangle for takeoff, disc for landing. Type is obvious; names still wait for tap.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .phone {
+    padding: 10px 12px 4px;
+    background: #1a1c1e;
+  }
+  .map {
+    position: relative;
+    height: 220px;
+    border-radius: 8px;
+    overflow: hidden;
+    background:
+      linear-gradient(160deg, #c5d4b8 0%, #9bb58a 38%, #7a9a6a 70%, #6b8f7a 100%);
+  }
+  .ridge {
+    position: absolute;
+    left: -10%;
+    top: 18%;
+    width: 80%;
+    height: 70%;
+    background: #8aa578;
+    clip-path: polygon(0 80%, 20% 40%, 40% 55%, 62% 18%, 88% 48%, 100% 36%, 100% 100%, 0 100%);
+    opacity: 0.55;
+  }
+  .lake {
+    position: absolute;
+    right: 8%;
+    bottom: 18%;
+    width: 38%;
+    height: 28%;
+    background: #6a9aaa;
+    border-radius: 50% 40% 55% 45%;
+    opacity: 0.7;
+  }
+  .dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    margin: -5px 0 0 -5px;
+    border-radius: 50%;
+    background: #1B3A6B;
+    box-shadow: 0 0 0 2px #FCFCFA;
+  }
+  .you {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    margin: -6px 0 0 -6px;
+    border-radius: 50%;
+    background: #2563A8;
+    box-shadow: 0 0 0 3px rgba(252,252,250,0.9), 0 0 0 5px rgba(37,99,168,0.35);
+  }
+  .named {
+    position: absolute;
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .pin {
+    width: 10px;
+    height: 10px;
+    margin-top: 3px;
+    border-radius: 50%;
+    background: #1B3A6B;
+    box-shadow: 0 0 0 2px #FCFCFA;
+    flex-shrink: 0;
+  }
+  .label {
+    font: 600 10px/1.2 ui-sans-serif, system-ui, sans-serif;
+    color: #16181A;
+    background: rgba(252,252,250,0.88);
+    padding: 3px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.01em;
+  }
+  .label em {
+    font-style: normal;
+    font-weight: 500;
+    color: #6B6F73;
+    font-size: 9px;
+  }
+  .typed {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+  .tri {
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 12px solid #1B3A6B;
+    filter: drop-shadow(0 0 0.5px #FCFCFA);
+  }
+  .circ {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #1E8E5A;
+    box-shadow: 0 0 0 2px #FCFCFA;
+  }
+  .tlabel {
+    font: 600 8px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #16181A;
+    background: rgba(252,252,250,0.85);
+    padding: 2px 4px;
+    border-radius: 3px;
+  }
+  .fly-btn {
+    position: absolute;
+    right: 10px;
+    bottom: 12px;
+    background: #1B3A6B;
+    color: #FCFCFA;
+    font: 600 12px/1 ui-sans-serif, system-ui, sans-serif;
+    padding: 8px 16px;
+    border-radius: 16px;
+  }
+</style>

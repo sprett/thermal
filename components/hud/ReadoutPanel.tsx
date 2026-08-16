@@ -2,7 +2,6 @@ import { Text, View } from 'react-native';
 
 import { useThemeColors } from '../../lib/theme';
 import { LABEL, font } from '../../lib/type';
-import { GlassSurface } from '../glass/GlassSurface';
 
 export type Readout = {
   climb: number;
@@ -19,19 +18,23 @@ export function ReadoutPanel({
   data,
   ruleColor,
   climbColor,
+  bottomInset = 0,
+  onPeekLayout,
 }: {
   data: Readout;
   ruleColor: string;
   climbColor: string;
+  bottomInset?: number;
+  onPeekLayout?: (height: number) => void;
 }) {
   const colors = useThemeColors();
 
   return (
-    <GlassSurface
-      className="overflow-hidden rounded-xl"
-      glassStyle="regular"
-    >
-      <View className="flex-row items-end gap-4 px-4 pb-3 pt-4">
+    <>
+      <View
+        className="flex-row items-end gap-4 px-4 pb-2 pt-2"
+        onLayout={(e) => onPeekLayout?.(e.nativeEvent.layout.height)}
+      >
         <View>
           <Text style={LABEL} className="mb-1 text-ink-faint">
             Climb m/s
@@ -68,7 +71,7 @@ export function ReadoutPanel({
 
       <View style={{ height: 1, backgroundColor: ruleColor }} />
 
-      <View className="flex-row flex-wrap px-4 pb-3.5 pt-3">
+      <View className="flex-row flex-wrap px-4 pb-1 pt-2.5">
         <Cell label="Speed km/h" value={String(Math.round(data.speed))} color={colors.ink} />
         <Cell label="Glide" value={data.glide.toFixed(1)} color={colors.ink} />
         <Cell
@@ -81,11 +84,14 @@ export function ReadoutPanel({
 
       <View style={{ height: 1, backgroundColor: ruleColor }} />
 
-      <View className="flex-row gap-6 px-4 pb-3 pt-2.5">
+      <View
+        className="flex-row gap-6 px-4 pt-2.5"
+        style={{ paddingBottom: bottomInset + 10 }}
+      >
         <Total label="Elapsed" value={data.elapsed} />
         <Total label="Dist km" value={data.distance.toFixed(1)} />
       </View>
-    </GlassSurface>
+    </>
   );
 }
 
@@ -101,7 +107,7 @@ function Cell({
   color: string;
 }) {
   return (
-    <View className="w-1/2 pb-3">
+    <View className="w-1/2 pb-2.5">
       <Text style={LABEL} className="text-ink-faint">
         {label}
       </Text>
