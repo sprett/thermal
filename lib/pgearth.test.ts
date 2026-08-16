@@ -51,6 +51,23 @@ test('parseTakeoffs keeps paragliding takeoffs and coerces strings', () => {
   });
 });
 
+test('parseTakeoffs treats PGE missing-altitude sentinel as 0', () => {
+  const sites = parseTakeoffs({
+    type: 'FeatureCollection',
+    features: [
+      {
+        ...pgeFeature,
+        properties: {
+          ...pgeFeature.properties,
+          takeoff_altitude: '-32768',
+        },
+      },
+    ],
+  });
+  assert.equal(sites.length, 1);
+  assert.equal(sites[0]?.altitude, 0);
+});
+
 test('parseTakeoffs drops hang-gliding-only sites', () => {
   const sites = parseTakeoffs({
     type: 'FeatureCollection',

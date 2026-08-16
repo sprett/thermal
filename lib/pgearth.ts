@@ -136,10 +136,14 @@ export function parseTakeoffs(raw: unknown): Takeoff[] {
     const lat = num(props.landing_lat);
     const lng = num(props.landing_lng);
 
+    const altitudeRaw = num(props.takeoff_altitude);
+    const altitude =
+      altitudeRaw == null || altitudeRaw === -32768 ? 0 : Math.round(altitudeRaw);
+
     sites.push({
       id: String(id),
       name: typeof props.name === 'string' && props.name ? props.name : 'Takeoff',
-      altitude: Math.round(num(props.takeoff_altitude) ?? 0),
+      altitude,
       longitude: coords[0],
       latitude: coords[1],
       landing: lat != null && lng != null ? { lat, lng } : null,
